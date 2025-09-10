@@ -1,14 +1,17 @@
 package com.powerswitchsim.transaction;
 
 import jakarta.persistence.*;
-//import jakarta.persistence.Table;
-
+import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-
 @Entity
 @Table
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@RequiredArgsConstructor
+@Builder
 public class Transaction {
 
     @Id
@@ -21,70 +24,18 @@ public class Transaction {
             strategy = GenerationType.SEQUENCE,
             generator = "transaction_sequence"
     )
-    private int transactionID;
+    private long transactionID;
+
+    @NonNull
     private BigDecimal amount;
+
+    @NonNull
     private String transactionState;
+
+    @NonNull
     private String powerSrc;
+
+    @NonNull
     private LocalDateTime timeStamp;
-
-    public Transaction() {
-    }
-
-    public Transaction(BigDecimal amount, String transactionState,
-                       String powerSrc, LocalDateTime timeStamp) {
-        this.amount = amount;
-        this.transactionState = transactionState;
-        this.powerSrc = powerSrc;
-        this.timeStamp = timeStamp;
-    }
-
-    public Transaction(int transactionID, BigDecimal amount,
-                       String transactionState, String powerSrc,
-                       LocalDateTime timeStamp) {
-        this.transactionID = transactionID;
-        this.amount = amount;
-        this.transactionState = transactionState;
-        this.powerSrc = powerSrc;
-        this.timeStamp = timeStamp;
-    }
-
-    public int getTransactionID() {
-        return transactionID;
-    }
-
-    public void setTransactionID(int transactionID) {
-        this.transactionID = transactionID;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public String getTransactionState() {
-        return transactionState;
-    }
-
-    public void setTransactionState(String transactionState) {
-        this.transactionState = transactionState;
-    }
-
-    public String getPowerSrc() {
-        return powerSrc;
-    }
-
-    public void setPowerSrc(String powerSrc) {
-        this.powerSrc = powerSrc;
-    }
-
-    public LocalDateTime getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(LocalDateTime timeStamp) {
-        this.timeStamp = timeStamp;
-    }
 }
+
