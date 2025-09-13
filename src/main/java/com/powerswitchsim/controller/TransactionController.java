@@ -1,5 +1,7 @@
-package com.powerswitchsim.transaction;
+package com.powerswitchsim.controller;
 
+import com.powerswitchsim.entities.Transaction;
+import com.powerswitchsim.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,12 +1,13 @@
-package com.powerswitchsim.transaction;
+package com.powerswitchsim.helpers;
 
 
+import com.powerswitchsim.repository.TransactionRepository;
+import com.powerswitchsim.entities.Transaction;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Configuration
@@ -30,7 +31,6 @@ public class TransactionConfig {
                             .powerSrc("Generator")
                             .transactionReceived("12-Sep-2025 10:43 AM")
                             .build();
-
             transactionRepository.saveAll(List.of(firstTransaction,secondTransaction));
         };
     }

@@ -1,5 +1,6 @@
-package com.powerswitchsim.transaction;
+package com.powerswitchsim.repository;
 
+import com.powerswitchsim.entities.Transaction;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,9 @@
-package com.powerswitchsim.transaction;
+package com.powerswitchsim.service;
 
 
+import com.powerswitchsim.repository.TransactionRepository;
+import com.powerswitchsim.entities.Transaction;
+import com.powerswitchsim.service.implementations.TransactionTimeProvider;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,10 +23,9 @@ public class TransactionService {
     }
 
     public void logNewTransactions(Transaction transaction){
-        LocalDateTime timestamp = LocalDateTime.now();
-        String formattedTimestamp = timestamp.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy hh:mm a"));
+        final TransactionTimeProvider transactionTimeProvider = new TransactionTimeProvider();
 
-        transaction.setTransactionReceived(formattedTimestamp);
+        transaction.setTransactionReceived(transactionTimeProvider.getCurrentTimeStamp());
         transactionRepository.saveAll(List.of(transaction));
 
     }
