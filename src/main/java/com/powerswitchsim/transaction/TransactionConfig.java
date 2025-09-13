@@ -20,7 +20,7 @@ public class TransactionConfig {
                             .amount(BigDecimal.valueOf(540000))
                             .transactionState("True")
                             .powerSrc("Grid")
-                            .timeStamp(LocalDateTime.now())
+                            .transactionReceived("12-Sep-2025 10:43 AM")
                             .build();
 
             Transaction secondTransaction =
@@ -28,7 +28,7 @@ public class TransactionConfig {
                             .amount(BigDecimal.valueOf(1500000))
                             .transactionState("False")
                             .powerSrc("Generator")
-                            .timeStamp(LocalDateTime.now())
+                            .transactionReceived("12-Sep-2025 10:43 AM")
                             .build();
 
             transactionRepository.saveAll(List.of(firstTransaction,secondTransaction));

@@ -36,6 +36,6 @@ public class Transaction {
     private String powerSrc;
 
     @NonNull
-    private LocalDateTime timeStamp;
+    private String transactionReceived;
 }
 
