@@ -30,6 +30,14 @@ public class TransactionService {
         transactionRepository.saveAll(List.of(transaction));
 
     }
+//    function to set powerSource
+    public void switchPowerSource(Long transactionID, String powerSrc){
+        Transaction transaction = transactionRepository.findById(transactionID).orElseThrow(
+                () -> new IllegalArgumentException("Transaction with id " + transactionID + " does not exist")
+        );
 
+        transaction.setPowerSrc(powerSrc);
 
+        transactionRepository.save(transaction);
+    }
 }

@@ -17,7 +17,7 @@ public enum PowerSource {
         return sourceState;
     }
 
-    public void setPowerSrc(Transaction transaction, String source){
+    public void setPowerSrc(Transaction transaction, String source) {
         transaction.setPowerSrc(String.valueOf(PowerSource.SOLAR));
     }
 

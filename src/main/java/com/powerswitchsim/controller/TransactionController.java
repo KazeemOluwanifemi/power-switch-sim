@@ -28,4 +28,14 @@ public class TransactionController {
     public void logTransactions(@RequestBody Transaction transaction) {
         transactionService.logNewTransactions(transaction);
     }
+
+    @PutMapping("{transactionID}")
+    public void switchSource(
+            @PathVariable Long transactionID,
+            @RequestParam String powerSrc
+    ) {
+        transactionService.switchPowerSource(transactionID, powerSrc);
+    }
+
+    public String checkPowerSrc()
 }
