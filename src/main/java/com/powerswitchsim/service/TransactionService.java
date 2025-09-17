@@ -13,6 +13,7 @@ import java.util.List;
 @Service
 public class TransactionService {
     private final TransactionRepository transactionRepository;
+//    PowerSource powerSource;
 
 
     public TransactionService(TransactionRepository transactionRepository) {
@@ -30,14 +31,26 @@ public class TransactionService {
         transactionRepository.saveAll(List.of(transaction));
 
     }
-//    function to set powerSource
-    public void switchPowerSource(Long transactionID, String powerSrc){
+//    function to switch powerSource
+    public void switchPowerSource(Long transactionID, PowerSource powerSrc){
         Transaction transaction = transactionRepository.findById(transactionID).orElseThrow(
-                () -> new IllegalArgumentException("Transaction with id " + transactionID + " does not exist")
+                () -> new IllegalArgumentException("Transaction with id " +
+                        transactionID + " does not exist")
         );
 
         transaction.setPowerSrc(powerSrc);
 
         transactionRepository.save(transaction);
+    }
+
+    public void getPowerSrcState(Long transactionID){
+        Transaction transaction = transactionRepository.findById(transactionID).orElseThrow(
+                () -> new IllegalArgumentException("Transaction with id " + transactionID + " does not exist")
+        );
+
+//        String powerSrc = transaction.getPowerSrc();
+        String powerState = transaction.getTransactionState();
+
+        System.out.println(powerState);
     }
 }

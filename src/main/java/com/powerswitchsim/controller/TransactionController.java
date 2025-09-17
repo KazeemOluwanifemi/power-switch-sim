@@ -1,6 +1,7 @@
 package com.powerswitchsim.controller;
 
 import com.powerswitchsim.entities.Transaction;
+import com.powerswitchsim.service.PowerSource;
 import com.powerswitchsim.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,10 +33,18 @@ public class TransactionController {
     @PutMapping("{transactionID}")
     public void switchSource(
             @PathVariable Long transactionID,
-            @RequestParam String powerSrc
+            @RequestParam String powerSrcString
     ) {
+        PowerSource powerSrc = PowerSource.valueOf(powerSrcString.toUpperCase());
         transactionService.switchPowerSource(transactionID, powerSrc);
     }
 
-    public String checkPowerSrc()
+
+    @GetMapping("{transactionID}")
+    public void getPowerSourceState(
+            @PathVariable Long transactionID
+    ) {
+        transactionService.getPowerSrcState(transactionID);
+    }
+
 }

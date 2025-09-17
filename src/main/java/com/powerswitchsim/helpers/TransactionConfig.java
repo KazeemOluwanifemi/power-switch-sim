@@ -3,6 +3,7 @@ package com.powerswitchsim.helpers;
 
 import com.powerswitchsim.repository.TransactionRepository;
 import com.powerswitchsim.entities.Transaction;
+import com.powerswitchsim.service.PowerSource;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +21,7 @@ public class TransactionConfig {
                     Transaction.builder()
                             .amount(BigDecimal.valueOf(540000))
                             .transactionState("True")
-                            .powerSrc("Grid")
+                            .powerSrc(PowerSource.GENERATOR)
                             .transactionReceived("12-Sep-2025 10:43 AM")
                             .build();
 
@@ -28,7 +29,7 @@ public class TransactionConfig {
                     Transaction.builder()
                             .amount(BigDecimal.valueOf(1500000))
                             .transactionState("False")
-                            .powerSrc("Generator")
+                            .powerSrc(PowerSource.SOLAR)
                             .transactionReceived("12-Sep-2025 10:43 AM")
                             .build();
             transactionRepository.saveAll(List.of(firstTransaction,secondTransaction));

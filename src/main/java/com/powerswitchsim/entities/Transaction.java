@@ -1,5 +1,6 @@
 package com.powerswitchsim.entities;
 
+import com.powerswitchsim.service.PowerSource;
 import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
@@ -31,8 +32,9 @@ public class Transaction {
     @NonNull
     private String transactionState;
 
+    @Enumerated
     @NonNull
-    private String powerSrc;
+    private PowerSource powerSrc;
 
     @NonNull
     private String transactionReceived;
