@@ -22,13 +22,19 @@ public class TransactionService {
         return (List<Transaction>) transactionRepository.findAll();
     }
 
-    public List<Transaction> logNewTransactions(Transaction transaction){
+    public void saveNewTransactions(Transaction transaction){
         transaction.setTransactionTimestamp(transactionTimeProvider.getCurrentTimeStamp());
+//        String powerSrc = String.valueOf(transaction.getPowerSrc());
+//
+//        transaction.setPowerSrc(PowerSource.valueOf(powerSrc.toUpperCase()));
+
         transactionRepository.saveAll(List.of(transaction));
 
         long transactionID = transaction.getTransactionID();
-        return transactionRepository.findTransactionByTransactionID(transactionID);
+        transactionRepository.findTransactionByTransactionID(transactionID);
     }
+
+
 //    function to switch powerSource
     public List<Transaction> switchPowerSource(Long transactionID, PowerSource powerSrc){
         Transaction transaction = transactionRepository.findById(transactionID).orElseThrow(
@@ -42,6 +48,8 @@ public class TransactionService {
         long switchedTransactionID = transaction.getTransactionID();
         return transactionRepository.findTransactionByTransactionID(switchedTransactionID);
     }
+
+
 
     public String getPowerSrcState(Long transactionID) {
         Transaction transaction = transactionRepository.findById(transactionID).orElseThrow(

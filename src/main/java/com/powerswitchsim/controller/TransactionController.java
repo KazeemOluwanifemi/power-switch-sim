@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -30,25 +29,33 @@ public class TransactionController {
         return transactionService.getTransactions();
     }
 
-    @PostMapping("/log-transaction")
-    public ResponseEntity<TransactionResponse> logTransactions(@RequestBody TransactionRequest transactionRequest) {
+    @PostMapping("/save-transaction")
+    public ResponseEntity<TransactionResponse> saveTransactions(
+            @RequestBody TransactionRequest transactionRequest
+    ) {
         Transaction transaction = new Transaction();
         transaction.setAmount(transactionRequest.getAmount());
         transaction.setTransactionConfirmed(transactionRequest.getTransactionConfirmed());
-        transaction.setPowerSrc(transactionRequest.getPowerSrc());
 
-        transactionService.logNewTransactions(transaction);
+        String powerSrc = String.valueOf(transactionRequest.getPowerSrc());
+        transaction.setPowerSrc(PowerSource.valueOf(powerSrc.toUpperCase()));
+
+        transactionService.saveNewTransactions(transaction);
 
         TransactionResponse response = new TransactionResponse();
 
         response.setTransactionID(transaction.getTransactionID());
         response.setAmount(transaction.getAmount());
         response.setTransactionConfirmed(transaction.getTransactionConfirmed());
-        response.setPowerSrc(transaction.getPowerSrc());
+
+        String powerSrcRequest = String.valueOf(transactionRequest.getPowerSrc());
+        response.setPowerSrc(PowerSource.valueOf(powerSrcRequest.toUpperCase()));
+
         response.setTransactionTimeStamp(transaction.getTransactionTimestamp());
 
         return ResponseEntity.ok(response);
     }
+
 
     @PutMapping("{transactionID}")
     public List<Transaction> switchSource(
