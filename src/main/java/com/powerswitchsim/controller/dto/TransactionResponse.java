@@ -1,13 +1,23 @@
 package com.powerswitchsim.controller.dto;
 
 import com.powerswitchsim.service.PowerSource;
+
 import java.math.BigDecimal;
 
-
-public class TransactionRequest {
+public class TransactionResponse {
+    private long transactionID;
     private BigDecimal amount;
     private String transactionConfirmed;
     private PowerSource powerSrc;
+    private String transactionTimeStamp;
+
+    public long getTransactionID() {
+        return transactionID;
+    }
+
+    public void setTransactionID(long transactionID) {
+        this.transactionID = transactionID;
+    }
 
     public BigDecimal getAmount() {
         return amount;
@@ -31,5 +41,13 @@ public class TransactionRequest {
 
     public void setPowerSrc(PowerSource powerSrc) {
         this.powerSrc = powerSrc;
+    }
+
+    public String getTransactionTimeStamp() {
+        return transactionTimeStamp;
+    }
+
+    public void setTransactionTimeStamp(String transactionTimeStamp) {
+        this.transactionTimeStamp = transactionTimeStamp;
     }
 }
