@@ -20,17 +20,17 @@ public class TransactionConfig {
             Transaction firstTransaction =
                     Transaction.builder()
                             .amount(BigDecimal.valueOf(540000))
-                            .transactionState("True")
+                            .transactionConfirmed("True")
                             .powerSrc(PowerSource.GENERATOR)
-                            .transactionReceived("12-Sep-2025 10:43 AM")
+                            .transactionTimestamp("12-Sep-2025 10:43 AM")
                             .build();
 
             Transaction secondTransaction =
                     Transaction.builder()
                             .amount(BigDecimal.valueOf(1500000))
-                            .transactionState("False")
+                            .transactionConfirmed("False")
                             .powerSrc(PowerSource.SOLAR)
-                            .transactionReceived("12-Sep-2025 10:43 AM")
+                            .transactionTimestamp("12-Sep-2025 10:43 AM")
                             .build();
             transactionRepository.saveAll(List.of(firstTransaction,secondTransaction));
         };

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/transactions")
+@RequestMapping(path = "api/transactions/v1")
 public class TransactionController {
     private final TransactionService transactionService;
 
@@ -26,25 +26,25 @@ public class TransactionController {
     }
 
     @PostMapping("/log-transaction")
-    public void logTransactions(@RequestBody Transaction transaction) {
-        transactionService.logNewTransactions(transaction);
+    public List<Transaction> logTransactions(@RequestBody Transaction transaction) {
+        return transactionService.logNewTransactions(transaction);
     }
 
     @PutMapping("{transactionID}")
-    public void switchSource(
+    public List<Transaction> switchSource(
             @PathVariable Long transactionID,
-            @RequestParam String powerSrcString
+            @RequestBody String powerSrcString
     ) {
         PowerSource powerSrc = PowerSource.valueOf(powerSrcString.toUpperCase());
-        transactionService.switchPowerSource(transactionID, powerSrc);
+        return transactionService.switchPowerSource(transactionID, powerSrc);
     }
 
 
     @GetMapping("{transactionID}")
-    public void getPowerSourceState(
+    public String getPowerSourceState(
             @PathVariable Long transactionID
     ) {
-        transactionService.getPowerSrcState(transactionID);
+        return transactionService.getPowerSrcState(transactionID);
     }
 
 }

@@ -30,13 +30,13 @@ public class Transaction {
     private BigDecimal amount;
 
     @NonNull
-    private String transactionState;
+    private String transactionConfirmed;
 
     @Enumerated
     @NonNull
     private PowerSource powerSrc;
 
     @NonNull
-    private String transactionReceived;
+    private String transactionTimestamp;
 }
 

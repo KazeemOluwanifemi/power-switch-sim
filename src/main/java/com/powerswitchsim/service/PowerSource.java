@@ -3,8 +3,8 @@ package com.powerswitchsim.service;
 import com.powerswitchsim.entities.Transaction;
 
 public enum PowerSource {
-    GRID("Running"),
-    SOLAR("Down"),
+    GRID("Active"),
+    SOLAR("Inactive"),
     GENERATOR("Failed");
 
     private final String sourceState;

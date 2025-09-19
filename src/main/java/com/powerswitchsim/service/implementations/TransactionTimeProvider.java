@@ -1,6 +1,7 @@
 package com.powerswitchsim.service.implementations;
 
 import com.powerswitchsim.service.TimeStampProvider;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
