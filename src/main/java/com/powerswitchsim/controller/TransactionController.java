@@ -1,5 +1,6 @@
 package com.powerswitchsim.controller;
 
+import com.powerswitchsim.controller.dto.SwitchSourceRequest;
 import com.powerswitchsim.controller.dto.TransactionRequest;
 import com.powerswitchsim.controller.dto.TransactionResponse;
 import com.powerswitchsim.entities.Transaction;
@@ -60,18 +61,33 @@ public class TransactionController {
     @PutMapping("{transactionID}")
     public List<Transaction> switchSource(
             @PathVariable Long transactionID,
-            @RequestBody String powerSrcString
+            @RequestBody SwitchSourceRequest powerSrc
     ) {
-        PowerSource powerSrc = PowerSource.valueOf(powerSrcString.toUpperCase());
-        return transactionService.switchPowerSource(transactionID, powerSrc);
+        return transactionService.switchPowerSource(transactionID, powerSrc.getPowerSource());
     }
 
 
-    @GetMapping("{transactionID}")
+    @GetMapping("/source-state/{transactionID}")
     public String getPowerSourceState(
             @PathVariable Long transactionID
     ) {
         return transactionService.getPowerSrcState(transactionID);
+    }
+
+
+    @GetMapping("/single-transaction/{transactionID}")
+    public ResponseEntity<TransactionResponse> getOneTransaction(
+            @PathVariable Long transactionID
+    ) {
+        TransactionResponse response = new TransactionResponse();
+
+        response.setTransactionID(transactionService.getOneTransaction(transactionID).getTransactionID());
+        response.setAmount(transactionService.getOneTransaction(transactionID).getAmount());
+        response.setPowerSrc(transactionService.getOneTransaction(transactionID).getPowerSrc());
+        response.setTransactionConfirmed(transactionService.getOneTransaction(transactionID).getTransactionConfirmed());
+        response.setTransactionTimeStamp(transactionService.getOneTransaction(transactionID).getTransactionTimestamp());
+
+        return ResponseEntity.ok(response);
     }
 
 }

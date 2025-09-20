@@ -1,9 +1,12 @@
 package com.powerswitchsim.service;
 
 
+import com.powerswitchsim.controller.dto.SwitchSourceRequest;
+import com.powerswitchsim.controller.dto.TransactionResponse;
 import com.powerswitchsim.repository.TransactionRepository;
 import com.powerswitchsim.entities.Transaction;
 import com.powerswitchsim.service.implementations.TransactionTimeProvider;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,5 +61,11 @@ public class TransactionService {
 
         return("The " + transaction.getPowerSrc() +
                 " is " + transaction.getPowerSrc().getSourceState());
+    }
+
+    public Transaction getOneTransaction(Long transactionID) {
+        return transactionRepository.findById(transactionID).orElseThrow(
+                () -> new IllegalArgumentException("Transaction with id" + transactionID +  "does not exist")
+        );
     }
 }
